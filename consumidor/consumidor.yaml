@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumidor
+spec:
+  selector:
+    matchLabels:
+      app: consumidor
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: consumidor
+    spec:
+      containers:
+      - name: consumidor
+        image: aavilesndscognitivelabs/consumidor:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: RUN
+          value: "True"
+        - name: SLEEP
+          value: "3"
+        - name: RABBITMQ_HOST
+          value: "rabbitmq-cluster.default.svc.cluster.local"
+        - name: RABBITMQ_PORT
+          value: "5672"
+        - name: RABBITMQ_USERNAME
+          value: "eihXbjmRlkm6_xFs8gpLl_kGSS9NOhOq"
+        - name: RABBITMQ_PASSWORD
+          value: "7Oz4YzzHoHhVN2Pm2OF7l1TVhmYJFnZ1"
+        - name: RABBITMQ_EXCHANGE
+          value: ""
+        - name: RABBITMQ_QUEUE
+          value: "usuarios"
+        - name: RABBITMQ_ROUTING_KEY
+          value: "usuarios"
+
